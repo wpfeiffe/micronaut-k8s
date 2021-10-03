@@ -1,0 +1,46 @@
+<clr-spinner clrMedium *ngIf="!isLoaded">Loading data</clr-spinner>
+<div *ngIf="isLoaded">
+  <p><a [routerLink]="['/departments']"><< Back to Department List</a></p>
+
+  <div *ngIf="department.id > 0">
+    <h3>Edit Department {{department.id}} - {{department.deptName}}</h3>
+  </div>
+  <div *ngIf="department.id <= 0">
+    <h3>Create Department</h3>
+  </div>
+<hr>
+<clr-alert [clrAlertClosable]="true" [clrAlertType]="'success'" [(clrAlertClosed)]="!saveSuccess">
+  <clr-alert-item>
+    <span class="alert-text">Save Successful</span>
+  </clr-alert-item>
+</clr-alert>
+<clr-alert [clrAlertClosable]="true" [clrAlertType]="'danger'" [(clrAlertClosed)]="!saveError">
+  <clr-alert-item>
+    <span class="alert-text">Save Failed</span>
+  </clr-alert-item>
+</clr-alert>
+<form clrForm class="clr-form" (ngSubmit)="save()" #deptForm="ngForm">
+  <clr-input-container>
+    <label for="deptName">Department Name</label>
+    <input clrInput type="text" [(ngModel)]="department.deptName" name="deptName" id="deptName"
+           required #deptName="ngModel">
+  </clr-input-container>
+  <clr-input-container>
+    <label for="deptCode">Department Code</label>
+    <input clrInput type="text" [(ngModel)]="department.deptCode" name="deptCode" id="deptCode"
+           required #deptCode="ngModel">
+  </clr-input-container>
+  <clr-select-container>
+    <label for="company">Company</label>
+    <select clrSelect name="company" id="company" required
+            #dept="ngModel" [(ngModel)]="companyId">
+      <option *ngFor="let company of companies"
+              [value]="company.id">
+        {{company.companyName}}
+      </option>
+    </select>
+  </clr-select-container>
+  <br>
+  <button type="submit" class="btn btn-primary" [disabled]="!deptForm.dirty && !deptForm.touched">Save</button>
+</form>
+</div>

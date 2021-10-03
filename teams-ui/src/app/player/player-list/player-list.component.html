@@ -1,0 +1,49 @@
+<h1>
+  Players
+  <a [routerLink]="['/players', 0]" title="Create Player">
+    <clr-icon class="dg-cell-element" shape="plus-circle"></clr-icon>
+  </a>
+</h1>
+<clr-datagrid #datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+  <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
+  <clr-dg-column [clrDgField]="'fullName'">Full Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'position'">Position</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let player of players">
+    <clr-dg-cell>{{player.id}}</clr-dg-cell>
+    <clr-dg-cell>{{player.fullName}}</clr-dg-cell>
+    <clr-dg-cell>{{player.position}}</clr-dg-cell>
+    <clr-dg-cell>
+      <a [routerLink]="['/players', player.id]" title="Edit Player">
+        <clr-icon class="dg-cell-element" shape="pencil"></clr-icon>
+      </a>&nbsp;&nbsp;
+      <a [routerLink]="[]" (click)="confirmDelete(player)" title="Delete Player">
+        <clr-icon class="dg-cell-element" shape="trash"></clr-icon>
+      </a>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="20" [clrDgTotalItems]="total" [(clrDgPage)]="currentPage">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Players per page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{total}} players
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="confirmDeleteOpen">
+  <h3 class="modal-title">Delete Player</h3>
+  <div class="modal-header">
+    <button aria-label="Close" class="close" type="button">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Delete player: {{playerToDelete?.id}} : {{playerToDelete?.fullName}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" (click)="confirmDeleteOpen=false;" type="button">Cancel</button>
+    <button class="btn btn-primary" (click)="delete(playerToDelete?.id)" type="button">Ok</button>
+  </div>
+</clr-modal>

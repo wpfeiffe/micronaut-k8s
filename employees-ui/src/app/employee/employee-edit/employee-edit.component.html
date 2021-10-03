@@ -1,0 +1,61 @@
+<clr-spinner clrMedium *ngIf="!isLoaded">Loading data</clr-spinner>
+<div *ngIf="isLoaded">
+  <p><a [routerLink]="['/employees']"><< Back to Employee List</a></p>
+  <div *ngIf="employee.id > 0">
+    <h3>Edit Employee {{employee.id}} - {{employee.firstName}} {{employee.lastName}}</h3>
+  </div>
+  <div *ngIf="employee.id <= 0">
+    <h3>Create Employee</h3>
+  </div>
+  <hr>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'success'" [(clrAlertClosed)]="!saveSuccess">
+    <clr-alert-item>
+      <span class="alert-text">Save Successful</span>
+    </clr-alert-item>
+  </clr-alert>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'danger'" [(clrAlertClosed)]="!saveError">
+    <clr-alert-item>
+      <span class="alert-text">Save Failed</span>
+    </clr-alert-item>
+  </clr-alert>
+  <form clrForm class="clr-form" (ngSubmit)="save()" #empForm="ngForm">
+    <clr-input-container>
+      <label for="firstName">First Name</label>
+      <input clrInput type="text" [(ngModel)]="employee.firstName" name="firstName" id="firstName"
+             required #firstName="ngModel">
+    </clr-input-container>
+    <clr-input-container>
+      <label for="lastName">Last Name</label>
+      <input clrInput type="text" [(ngModel)]="employee.lastName" name="lastName" id="lastName"
+             required #lastName="ngModel">
+    </clr-input-container>
+    <clr-input-container>
+      <label for="isActive">Active</label>
+      <input clrInput type="text" [(ngModel)]="employee.active" name="isActive" id="isActive"
+             required #isActive="ngModel">
+    </clr-input-container>
+    <clr-input-container>
+      <label for="startDate">Start Date</label>
+      <input clrInput type="date" [(ngModel)]="employee.startDate" name="startDate" id="startDate"
+             required #startDate="ngModel">
+    </clr-input-container>
+    <clr-input-container>
+      <label for="title">Title</label>
+      <input clrInput type="text" [(ngModel)]="employee.title" name="title" id="title"
+             required #title="ngModel">
+    </clr-input-container>
+
+    <clr-select-container>
+      <label for="dept">Department</label>
+      <select clrSelect name="dept" id="dept" required
+              #dept="ngModel" [(ngModel)]="departmentId">
+        <option *ngFor="let department of departments"
+                [value]="department.id">
+          {{department.deptName}}
+        </option>
+      </select>
+    </clr-select-container>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!empForm.dirty && !empForm.touched">Save</button>
+  </form>
+</div>

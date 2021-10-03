@@ -1,0 +1,50 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("io.micronaut.application") version "2.0.4"
+}
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.wspfeiffer.employees.*")
+    }
+}
+
+dependencies {
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("javax.annotation:javax.annotation-api")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("javax.inject:javax.inject:1")
+    project(":employees-ui")
+    runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly "org.postgresql:postgresql"
+
+}
+
+application {
+    mainClass.set("com.wspfeiffer.employees.EmployeesApplication")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+dockerBuild {
+    images = ["wpfeiffe/${project.name}:${version}"]
+}
+
+
+

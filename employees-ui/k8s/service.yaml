@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: employees-ui
+  namespace: micronaut-k8s
+spec:
+  ports:
+    - name: employees-ui
+      port: 80
+      targetPort: 80
+  selector:
+    app: employees-ui
+  type: NodePort
+  sessionAffinity: None

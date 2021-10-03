@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: teams-ui
+  namespace: micronaut-k8s
+spec:
+  ports:
+    - name: teams-ui
+      port: 80
+      targetPort: 80
+  selector:
+    app: teams-ui
+  type: NodePort
+  sessionAffinity: None

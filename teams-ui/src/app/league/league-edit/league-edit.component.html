@@ -1,0 +1,31 @@
+<clr-spinner clrMedium *ngIf="!isLoaded">Loading data</clr-spinner>
+<div *ngIf="isLoaded">
+  <p><a [routerLink]="['/leagues']"><< Back to League List</a></p>
+  <div *ngIf="league.id > 0">
+    <h3>Edit League {{league.id}} - {{league.leagueName}}</h3>
+  </div>
+  <div *ngIf="league.id <= 0">
+    <h3>Create League</h3>
+  </div>
+
+  <hr>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'success'" [(clrAlertClosed)]="!saveSuccess">
+    <clr-alert-item>
+      <span class="alert-text">Save Successful</span>
+    </clr-alert-item>
+  </clr-alert>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'danger'" [(clrAlertClosed)]="!saveError">
+    <clr-alert-item>
+      <span class="alert-text">Save Failed</span>
+    </clr-alert-item>
+  </clr-alert>
+  <form clrForm class="clr-form" (ngSubmit)="save()" #empForm="ngForm">
+    <clr-input-container>
+      <label for="leagueName">League Name</label>
+      <input clrInput type="text" [(ngModel)]="league.leagueName" name="leagueName" id="leagueName"
+             required #leagueName="ngModel">
+    </clr-input-container>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!empForm.dirty && !empForm.touched">Save</button>
+  </form>
+</div>

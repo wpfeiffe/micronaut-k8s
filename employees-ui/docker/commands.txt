@@ -1,0 +1,3 @@
+docker build -t wpfeiffe/employees-ui:0.0.1 .
+docker push wpfeiffe/employees-ui:0.0.1
+docker run -d -p 8080:80 wpfeiffe/employees-ui:0.0.1

@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: employees
+  namespace: micronaut-k8s
+spec:
+  ports:
+    - name: employees
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: employees
+  type: NodePort
+  sessionAffinity: None

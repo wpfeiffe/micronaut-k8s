@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: employees
+  namespace: micronaut-k8s
+  labels:
+    app: employees
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      name: employees-svc
+      labels:
+        app: employees
+    spec:
+      containers:
+        - name: employees-svc
+          image: 'wpfeiffe/employees-svc:0.0.1'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          env:
+            - name: K8S
+              value: "true"
+          envFrom:
+            - configMapRef:
+                name: employees-svc-config
+          imagePullPolicy: Always

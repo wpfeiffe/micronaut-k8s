@@ -1,0 +1,30 @@
+<clr-spinner clrMedium *ngIf="!isLoaded">Loading data</clr-spinner>
+<div *ngIf="isLoaded">
+  <p><a [routerLink]="['/companies']"><< Back to Company List</a></p>
+  <div *ngIf="company.id > 0">
+    <h3>Edit Company {{company.id}} - {{company.companyName}}</h3>
+  </div>
+  <div *ngIf="company.id <= 0">
+    <h3>Create Company</h3>
+  </div>
+  <hr>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'success'" [(clrAlertClosed)]="!saveSuccess">
+    <clr-alert-item>
+      <span class="alert-text">Save Successful</span>
+    </clr-alert-item>
+  </clr-alert>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'danger'" [(clrAlertClosed)]="!saveError">
+    <clr-alert-item>
+      <span class="alert-text">Save Failed</span>
+    </clr-alert-item>
+  </clr-alert>
+  <form clrForm class="clr-form" (ngSubmit)="save()" #companyForm="ngForm">
+    <clr-input-container>
+      <label for="companyName">Company Name</label>
+      <input clrInput type="text" [(ngModel)]="company.companyName" name="companyName" id="companyName"
+             required #companyName="ngModel">
+    </clr-input-container>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!companyForm.dirty && !companyForm.touched">Save</button>
+  </form>
+</div>

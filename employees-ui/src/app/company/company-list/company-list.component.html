@@ -1,0 +1,47 @@
+<h1>
+  Companies
+  <a [routerLink]="['/companies', 0]" title="Create Company">
+    <clr-icon class="dg-cell-element" shape="plus-circle"></clr-icon>
+  </a>
+</h1>
+<clr-datagrid #datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+  <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
+  <clr-dg-column [clrDgField]="'companyName'">Company Name</clr-dg-column>
+  <clr-dg-column></clr-dg-column>
+
+  <clr-dg-row *ngFor="let company of companies">
+    <clr-dg-cell>{{company.id}}</clr-dg-cell>
+    <clr-dg-cell>{{company.companyName}}</clr-dg-cell>
+    <clr-dg-cell>
+      <a [routerLink]="['/companies', company.id]" title="Edit Company">
+        <clr-icon class="dg-cell-element" shape="pencil"></clr-icon>
+      </a>&nbsp;
+      <a [routerLink]="[]" (click)="confirmDelete(company)" title="Delete Company">
+        <clr-icon class="dg-cell-element" shape="trash"></clr-icon>
+      </a>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="total">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Companies per page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{total}} companies
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="confirmDeleteOpen">
+  <h3 class="modal-title">Delete Company</h3>
+  <div class="modal-header">
+    <button aria-label="Close" class="close" type="button">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Delete company: {{companyToDelete?.id}} : {{companyToDelete?.companyName}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" (click)="confirmDeleteOpen=false;" type="button">Cancel</button>
+    <button class="btn btn-primary" (click)="delete(companyToDelete?.id)" type="button">Ok</button>
+  </div>
+</clr-modal>

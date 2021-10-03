@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: employees-svc-config
+  namespace: micronaut-k8s
+  labels:
+    app: employees
+data:
+  POSTGRES_HOST: snicko-mbp-2016.local
+

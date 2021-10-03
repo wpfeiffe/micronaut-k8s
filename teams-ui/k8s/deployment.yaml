@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: teams-ui
+  namespace: micronaut-k8s
+  labels:
+    app: teams-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teams-ui
+  template:
+    metadata:
+      name: teams-ui
+      labels:
+        app: teams-ui
+    spec:
+      containers:
+        - name: teams-ui
+          image: 'wpfeiffe/teams-ui:0.0.1'
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              httpHeaders:
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          imagePullPolicy: Always

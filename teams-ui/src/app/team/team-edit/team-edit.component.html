@@ -1,0 +1,45 @@
+<clr-spinner clrMedium *ngIf="!isLoaded">Loading data</clr-spinner>
+<div *ngIf="isLoaded">
+  <p><a [routerLink]="['/teams']"><< Back to Team List</a></p>
+  <div *ngIf="team.id > 0">
+    <h3>Edit Team {{team.id}} - {{team.teamName}}</h3>
+  </div>
+  <div *ngIf="team.id <= 0">
+    <h3>Create Team</h3>
+  </div>
+  <hr>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'success'" [(clrAlertClosed)]="!saveSuccess">
+    <clr-alert-item>
+      <span class="alert-text">Save Successful</span>
+    </clr-alert-item>
+  </clr-alert>
+  <clr-alert [clrAlertClosable]="true" [clrAlertType]="'danger'" [(clrAlertClosed)]="!saveError">
+    <clr-alert-item>
+      <span class="alert-text">Save Failed</span>
+    </clr-alert-item>
+  </clr-alert>
+  <form clrForm class="clr-form" (ngSubmit)="save()" #empForm="ngForm">
+    <clr-input-container>
+      <label for="teamName">Team Name</label>
+      <input clrInput type="text" [(ngModel)]="team.teamName" name="teamName" id="teamName"
+             required #teamName="ngModel">
+    </clr-input-container>
+    <clr-input-container>
+      <label for="teamCode">Team Code</label>
+      <input clrInput type="text" [(ngModel)]="team.teamCode" name="teamCode" id="teamCode"
+             required #teamCode="ngModel">
+    </clr-input-container>
+    <clr-select-container>
+      <label for="league">League</label>
+      <select clrSelect name="league" id="league" required
+              #dept="ngModel" [(ngModel)]="leagueId">
+        <option *ngFor="let league of leagues"
+                [value]="league.id">
+          {{league.leagueName}}
+        </option>
+      </select>
+    </clr-select-container>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!empForm.dirty && !empForm.touched">Save</button>
+  </form>
+</div>

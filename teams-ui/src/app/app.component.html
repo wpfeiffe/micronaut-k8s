@@ -1,0 +1,38 @@
+<div class="main-container">
+  <header class="header header-4">
+    <div class="branding">
+      <a href="javascript://" class="active nav-link nav-text">
+        <span class="title"><clr-icon shape="blocks-group" size="24"></clr-icon> Teams App</span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a [routerLink]="['players']" routerLinkActive="active" class="nav-link nav-text">Players</a>
+      <a [routerLink]="['teams']" routerLinkActive="active" class="nav-link nav-text">Teams</a>
+      <a [routerLink]="['leagues']" routerLinkActive="active" class="nav-link nav-text">Leagues</a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger>
+          <clr-icon shape="cog"></clr-icon>
+<!--          <clr-icon shape="caret down"></clr-icon>-->
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <clr-dropdown>
+            <button clrDropdownTrigger>Actuator Links</button>
+            <clr-dropdown-menu  clrPosition="bottom-right">
+              <button *ngFor="let item of actuatorEndpoints$ | async" clrDropdownItem (click)="openNew($event, item.href)">
+                {{item.name}}
+              </button>
+            </clr-dropdown-menu>
+          </clr-dropdown>
+          <a (click)="openNew($event, '/swagger-ui.html')" clrDropdownItem>Swagger UI</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: employees-ui
+  namespace: micronaut-k8s
+  labels:
+    app: employees-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employees-ui
+  template:
+    metadata:
+      name: employees-ui
+      labels:
+        app: employees-ui
+    spec:
+      containers:
+        - name: employees-ui
+          image: 'wpfeiffe/employees-ui:0.0.1'
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              httpHeaders:
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          imagePullPolicy: Always

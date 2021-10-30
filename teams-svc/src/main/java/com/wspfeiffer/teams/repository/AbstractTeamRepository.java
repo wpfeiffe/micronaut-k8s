@@ -1,8 +1,8 @@
 package com.wspfeiffer.teams.repository;
 
+import com.wspfeiffer.teams.domain.Team;
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.CrudRepository;
-import com.wspfeiffer.teams.domain.Team;
 
 import javax.persistence.EntityManager;
 

@@ -26,6 +26,8 @@ dependencies {
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.rxjava3:micronaut-rxjava3:2.0.0")
+    implementation("io.micronaut.rxjava3:micronaut-rxjava3-http-client:2.0.0")
     implementation("javax.inject:javax.inject:1")
     project(":teams-ui")
     runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")

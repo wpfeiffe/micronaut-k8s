@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: employees-svc
-          image: 'wpfeiffe/employees-svc:0.0.1'
+          image: 'wpfeiffe/employees-svc:0.0.2'
           ports:
             - containerPort: 8080
               protocol: TCP

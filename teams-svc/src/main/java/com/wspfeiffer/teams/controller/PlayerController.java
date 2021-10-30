@@ -1,29 +1,21 @@
 package com.wspfeiffer.teams.controller;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.micronaut.data.model.Page;
-import io.micronaut.data.model.Pageable;
-import io.micronaut.http.HttpHeaders;
-import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.*;
-import io.reactivex.Single;
 import com.wspfeiffer.teams.domain.Player;
 import com.wspfeiffer.teams.dto.Employee;
 import com.wspfeiffer.teams.dto.EmployeePlayer;
 import com.wspfeiffer.teams.repository.AbstractPlayerRepository;
 import com.wspfeiffer.teams.repository.PlayerRepository;
-import com.wspfeiffer.teams.service.EmployeesClient;
 import com.wspfeiffer.teams.service.EmployeesOperations;
+import io.micronaut.data.model.Page;
+import io.micronaut.data.model.Pageable;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;

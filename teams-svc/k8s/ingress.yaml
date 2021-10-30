@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: teams-ingress
+  namespace: micronaut-k8s
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    #nginx.ingress.kubernetes.io/rewrite-target: /$0
+spec:
+  defaultBackend:
+    service:
+      name: teams-ui
+      port:
+        number: 80
+  rules:
+    - host: teams-app
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: teams
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: teams-ui
+                port:
+                  number: 80

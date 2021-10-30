@@ -1,12 +1,11 @@
 package com.wspfeiffer.teams.controller;
 
-import io.micronaut.data.model.Page;
-import io.micronaut.data.model.Pageable;
-import io.micronaut.http.HttpHeaders;
-import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.*;
 import com.wspfeiffer.teams.domain.League;
 import com.wspfeiffer.teams.repository.LeagueRepository;
+import io.micronaut.data.model.Page;
+import io.micronaut.data.model.Pageable;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;

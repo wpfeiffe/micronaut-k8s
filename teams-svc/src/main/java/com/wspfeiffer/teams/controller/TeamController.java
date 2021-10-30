@@ -1,13 +1,12 @@
 package com.wspfeiffer.teams.controller;
 
 import com.sun.istack.Nullable;
-import io.micronaut.data.model.Page;
-import io.micronaut.data.model.Pageable;
-import io.micronaut.http.HttpHeaders;
-import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.*;
 import com.wspfeiffer.teams.domain.Team;
 import com.wspfeiffer.teams.repository.TeamRepository;
+import io.micronaut.data.model.Page;
+import io.micronaut.data.model.Pageable;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;

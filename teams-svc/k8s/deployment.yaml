@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: teams-svc
-          image: 'wpfeiffe/teams-svc:0.0.1'
+          image: 'wpfeiffe/teams-svc:0.0.2'
           ports:
             - containerPort: 8080
               protocol: TCP

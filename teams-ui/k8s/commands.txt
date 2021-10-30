@@ -1,1 +1,1 @@
-docker push wpfeiffe/teams-svc:0.0.1
+docker push wpfeiffe/teams-ui:0.0.1

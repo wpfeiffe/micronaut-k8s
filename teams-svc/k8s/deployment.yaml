@@ -1,20 +1,20 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: teams
+  name: teams-svc
   namespace: micronaut-k8s
   labels:
-    app: teams
+    app: teams-svc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: teams
+      app: teams-svc
   template:
     metadata:
       name: teams-svc
       labels:
-        app: teams
+        app: teams-svc
     spec:
       containers:
         - name: teams-svc

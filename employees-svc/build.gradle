@@ -19,6 +19,7 @@ micronaut {
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")
@@ -26,6 +27,7 @@ dependencies {
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.swagger.core.v3:swagger-annotations")
     implementation("javax.inject:javax.inject:1")
     project(":employees-ui")
     runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")
@@ -44,6 +46,11 @@ java {
 
 dockerBuild {
     images = ["wpfeiffe/${project.name}:${version}"]
+}
+
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.forkOptions.jvmArgs << '-Dmicronaut.openapi.views.spec=rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop'
 }
 
 

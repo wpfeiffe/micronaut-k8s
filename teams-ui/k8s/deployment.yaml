@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: teams-ui
-          image: 'wpfeiffe/teams-ui:0.0.1'
+          image: 'wpfeiffe/teams-ui:0.0.2'
           ports:
             - containerPort: 80
               protocol: TCP

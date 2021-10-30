@@ -20,7 +20,21 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: employees
+                name: employees-svc
+                port:
+                  number: 8080
+          - path: /swagger-ui
+            pathType: Prefix
+            backend:
+              service:
+                name: employees-svc
+                port:
+                  number: 8080
+          - path: /swagger
+            pathType: Prefix
+            backend:
+              service:
+                name: employees-svc
                 port:
                   number: 8080
           - path: /

@@ -1,14 +1,14 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: teams
+  name: teams-svc
   namespace: micronaut-k8s
 spec:
   ports:
-    - name: teams
+    - name: teams-svc
       port: 8080
       targetPort: 8080
   selector:
-    app: teams
+    app: teams-svc
   type: NodePort
   sessionAffinity: None

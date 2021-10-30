@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: employees-ui
-          image: 'wpfeiffe/employees-ui:0.0.1'
+          image: 'wpfeiffe/employees-ui:0.0.2'
           ports:
             - containerPort: 80
               protocol: TCP

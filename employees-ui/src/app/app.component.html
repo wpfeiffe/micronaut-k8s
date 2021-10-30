@@ -17,15 +17,7 @@
 <!--          <clr-icon shape="caret down"></clr-icon>-->
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <clr-dropdown>
-            <button clrDropdownTrigger>Actuator Links</button>
-            <clr-dropdown-menu  clrPosition="bottom-right">
-              <button *ngFor="let item of actuatorEndpoints$ | async" clrDropdownItem (click)="openNew($event, item.href)">
-                {{item.name}}
-              </button>
-            </clr-dropdown-menu>
-          </clr-dropdown>
-          <a (click)="openNew($event, '/swagger-ui.html')" clrDropdownItem>Swagger UI</a>
+          <a (click)="openNew($event, '/swagger-ui')" clrDropdownItem>Swagger UI</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>

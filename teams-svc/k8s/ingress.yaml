@@ -20,7 +20,21 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: teams
+                name: teams-svc
+                port:
+                  number: 8080
+          - path: /swagger-ui
+            pathType: Prefix
+            backend:
+              service:
+                name: teams-svc
+                port:
+                  number: 8080
+          - path: /swagger
+            pathType: Prefix
+            backend:
+              service:
+                name: teams-svc
                 port:
                   number: 8080
           - path: /

@@ -1,20 +1,20 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: employees
+  name: employees-svc
   namespace: micronaut-k8s
   labels:
-    app: employees
+    app: employees-svc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: employees
+      app: employees-svc
   template:
     metadata:
       name: employees-svc
       labels:
-        app: employees
+        app: employees-svc
     spec:
       containers:
         - name: employees-svc
